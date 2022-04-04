@@ -1,0 +1,21 @@
+#Date created: Oct 16, 2006
+# Window title
+	Painting Robot (Test #3)
+# first street, first avenue, num streets, num avenues
+	0 0 10 10
+# intersection size
+	55
+# things
+becker.robots.Thing 1 6 
+becker.robots.Thing 1 7 
+becker.robots.Thing 2 8 
+becker.robots.Thing 2 5 
+becker.robots.Thing 3 8 
+becker.robots.Thing 3 6 
+becker.robots.Thing 4 8 
+becker.robots.Thing 4 7 
+
+
+
+
+

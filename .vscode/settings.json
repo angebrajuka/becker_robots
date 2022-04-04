@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "becker.jar"
+    ],
+    "java.project.sourcePaths": ["**/**.java"]
+}
