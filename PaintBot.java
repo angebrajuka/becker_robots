@@ -7,31 +7,48 @@ import java.util.Stack;
 public class PaintBot extends RobotSU {
 
     public PaintBot(City city, int x, int y) {
-        super(city, x, y);
+        super(city, x, y, Direction.NORTH, 100);
+    }
+
+    Point CurrentPosition() {
+        return new Point(GetX(), GetY());
+    }
+
+    int DistanceTo(Point point) {
+        Point curr = CurrentPosition();
+        return Math.abs(point.getX() - curr.getX()) + Math.abs(point.getY() - curr.getY());
+    }
+
+    Point Closest(HashSet<Point> set) {
+	int closestDist = Integer.MAX_VALUE;
+	Point closest = null;
+	for(var point : set) {
+            int dist = DistanceTo(point);
+            if(dist <= closestDist) {
+                closestDist = dist;
+                closest = point;
+            }
+	}
+	return closest;
     }
 
     // assumes start within polygon
-    void Paint() {
-        HashSet<Point> toPaint = new HashSet<Point>();
-        int startX = GetX();
-        int startY = GetY();
+    public void Paint() {
+        HashSet<Point> visited = new HashSet<Point>();
+        HashSet<Point> toVisit = new HashSet<Point>();
+        toVisit.add(CurrentPosition());
 
-        Stack<Point> toVisit = new Stack<Point>();
-        toVisit.push(new Point(startX, startY));
-
-        while(!toVisit.empty()) {
-            Point p = toVisit.pop();
+        while(!toVisit.isEmpty() && countThingsInBackpack() > 0) {
+            Point p = Closest(toVisit);
+	    toVisit.remove(p);
+	    if(visited.contains(p)) continue;
             Goto(p);
-            if(canPickThing() || toPaint.contains(p)) continue;
-            toPaint.add(p);
+	    visited.add(p);
+            if(canPickThing()) continue;
+            putThing();
             for(Direction d : Utils.directions) {
-                toVisit.push(p.Get(d));
+                toVisit.add(p.Get(d));
             }
-        }
-
-        for(Point p : toPaint) {
-            Goto(p);
-            new Thing(getCity(), GetY(), GetX());
         }
     }
 
