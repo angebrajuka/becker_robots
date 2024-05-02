@@ -11,7 +11,7 @@ import java.util.Stack;
  * only uses 200 transparent robots for 10x10 tho... and fancy graphs
  */
 public class MazeBot400 extends RobotSU {
-    private Point thingPoint;
+    protected Point thingPoint;
 
     public MazeBot400(City city, int x, int y) {
         super(city, x, y, Direction.NORTH);
