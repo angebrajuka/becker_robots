@@ -11,7 +11,7 @@ compile with:
 
 run with:
 
-  java -cp "becker.jar;.out" <program name> <args>
+  java -cp "becker.jar;.out" program_name args
 
 eg:
 
