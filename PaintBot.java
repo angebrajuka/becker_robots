@@ -10,26 +10,22 @@ public class PaintBot extends RobotSU {
         super(city, x, y, Direction.NORTH, 100);
     }
 
-    Point CurrentPosition() {
-        return new Point(GetX(), GetY());
-    }
-
     int DistanceTo(Point point) {
         Point curr = CurrentPosition();
         return Math.abs(point.getX() - curr.getX()) + Math.abs(point.getY() - curr.getY());
     }
 
     Point Closest(HashSet<Point> set) {
-	int closestDist = Integer.MAX_VALUE;
-	Point closest = null;
-	for(var point : set) {
+        int closestDist = Integer.MAX_VALUE;
+        Point closest = null;
+        for(var point : set) {
             int dist = DistanceTo(point);
             if(dist <= closestDist) {
                 closestDist = dist;
                 closest = point;
             }
-	}
-	return closest;
+        }
+        return closest;
     }
 
     // assumes start within polygon
@@ -40,10 +36,10 @@ public class PaintBot extends RobotSU {
 
         while(!toVisit.isEmpty() && countThingsInBackpack() > 0) {
             Point p = Closest(toVisit);
-	    toVisit.remove(p);
-	    if(visited.contains(p)) continue;
+            toVisit.remove(p);
+            if(visited.contains(p)) continue;
             Goto(p);
-	    visited.add(p);
+            visited.add(p);
             if(canPickThing()) continue;
             putThing();
             for(Direction d : Utils.directions) {

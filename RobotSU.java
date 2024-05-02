@@ -12,6 +12,10 @@ public class RobotSU extends RobotSE {
     public int GetX() { return getAvenue(); }
     public int GetY() { return getStreet(); }
 
+    Point CurrentPosition() {
+        return new Point(GetX(), GetY());
+    }
+
     public void TurnTo(Direction target) {
         if(getDirection() == target)
             return;
